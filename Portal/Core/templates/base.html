@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
-    <title>Document</title>
+    <title>Obscurus</title>
 </head>
 
 <body class="bg-gray-50 flex flex-col min-h-screen">
@@ -44,9 +44,7 @@
 
             <!-- Copyright section -->
         <div class=" p-1 m-1 flex justify-center items-center">
-            <p class="text-center text-sm text-gray-500 my-3">
-                &copy; 2022-2023 <a href="#" class="hover:underline" target="_blank">Obscurus</a>. All rights reserved.
-            </p>
+            {% include 'copyright.html' %}
         </div>
     </footer>
 

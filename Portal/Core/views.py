@@ -12,13 +12,29 @@ def login_page(request):
     return render(request, 'login.html', {})
 
 def handler404(request, *args, **argv):
-    return render(request, 'errors/404.html', status=404)
+    context = {
+        'Name': 'Error404',
+        'Message': 'Page Not Found'
+    }
+    return render(request, 'error_template.html', context, status=404)
 
 def handler500(request, *args, **argv):
-    return render(request, 'errors/500.html', status=500)
+    context = {
+        'Name': 'Error500',
+        'Message': 'Internal Server Error'
+    }
+    return render(request, 'error_template.html', status=500)
 
 def handler403(request, *args, **argv):
-    return render(request, 'errors/403.html', status=403)
+    context = {
+        'Name': 'Error403',
+        'Message': 'Permission Denied'
+    }
+    return render(request, 'error_template.html', status=403)
 
 def handler400(request, *args, **argv):
-    return render(request, 'errors/400.html', status=400)
+    context = {
+        'Name': 'Error400',
+        'Message': 'Bad Request'
+    }
+    return render(request, 'error_template.html', status=400)

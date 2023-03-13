@@ -266,3 +266,5 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/django,python
 
 Portal/Portal/node_modules
+
+jstoolchain

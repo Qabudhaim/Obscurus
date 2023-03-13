@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
-    <title>Document</title>
+    <title>Obscurus| Login</title>
 </head>
 
 <body class="bg-gray-50 flex flex-col min-h-screen">
@@ -17,9 +17,7 @@
             <h2 class="text-center text-gray-800 text-8xl hover:text-sky-600 transition duration-200 ease select-none"><span class="font-bold uppercase">Obscurus</span></h2>
             <h2 class="text-center text-gray-500 text-3xl">Welcome to the <span class="uppercase font-bold hover:text-sky-600 transition duration-200 ease select-none">Portal</span></h2>
             <div class=" p-1 m-1 flex justify-center items-center">
-                <p class="text-center text-sm text-gray-500 my-3">
-                    &copy; 2022-2023 <a href="#" class="uppercase font-bold hover:text-sky-600 transition duration-200 ease select-none" target="_blank">Obscurus</a>. All rights reserved.
-                </p>
+                {% include 'copyright.html' %}
             </div>
         </div>
 
@@ -57,7 +55,6 @@
         </div>
 
     </main>
-
-    
+   
 </body>
 </html>
