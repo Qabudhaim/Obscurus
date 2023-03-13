@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    <title>Gallery</title>
+</head>
+
+<h1 class="text-3xl text-center font-bold m-6">
+    Gallery
+</h1>
+<body class="bg-gray-100">
+    <div class="w-screen h-screen flex justify-center bg-gray-100">
+        <div class="w-full mx-auto py-16">
+            <h1 class="text-3xl text-center font-bold mb-6">
+            Button Filled Component (Default)
+            </h1>
+            <div class="bg-white px-6 py-4 my-3 w-3/4 mx-auto shadow rounded-md flex items-center">
+                <div class="grid grid-cols-4 gap-x-3 w-full text-center mx-auto">
+                    <button
+                        type="button"
+                        class="
+                        border border-blue-500 bg-blue-500 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-blue-600 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Primary
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-indigo-500 bg-indigo-500 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-indigo-600 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Secondary
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-green-500 bg-green-500 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-green-600 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Success
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-red-500 bg-red-500 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-red-600 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Error
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-yellow-500 bg-yellow-500 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-yellow-600 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Warning
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-teal-500 bg-teal-500 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-teal-600 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Info
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-gray-700 bg-gray-700 
+                        text-white 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-gray-800 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Dark
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-gray-200 bg-gray-200 
+                        text-gray-700 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-gray-300 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Light
+                    </button>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl text-center font-bold mb-6">
+                Button Border Component
+            </h1>
+            <div class="bg-white px-6 py-4 my-3 w-3/4 mx-auto shadow rounded-md flex items-center">
+                <div class="grid grid-cols-4 gap-x-3 w-full text-center mx-auto">
+                    <button
+                        type="button"
+                        class="
+                        border border-blue-500 border-2 
+                        text-blue-500 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-blue-500 hover:text-white 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Primary
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-indigo-500 border-2 
+                        text-indigo-500 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-indigo-500 hover:text-white
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Secondary
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-green-500 border-2 
+                        text-green-500 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-green-500 hover:text-white
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Success
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-red-500 border-2 
+                        text-red-500 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-red-500 hover:text-white
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Error
+                    </button>
+                    <button
+                        type="button"
+                        class="border border-yellow-500 border-2 
+                        text-yellow-500 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-yellow-500 hover:text-white
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Warning
+                    </button>
+                    <button
+                        type="button"
+                        class="border border-teal-500 border-2 
+                        text-teal-500 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-teal-500 hover:text-white
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Info
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-gray-700 border-2 
+                        text-gray-700 
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-gray-700 hover:text-white 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Dark
+                    </button>
+                    <button
+                        type="button"
+                        class="
+                        border border-gray-200 border-2 
+                        text-gray-700
+                        rounded-md 
+                        px-4 py-2 
+                        m-2 
+                        transition duration-500 ease select-none 
+                        hover:bg-gray-200 hover:text-gray-700 
+                        focus:outline-none focus:shadow-outline
+                        ">
+                        Light
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

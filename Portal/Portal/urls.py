@@ -21,5 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('issues/', include('Issues.urls', namespace='Issues'), name='Issues'),
     path('tips/', include('Tips.urls', namespace='Tips'), name='Tips'),
-    path('tips/', include('Tips.urls')),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
+
+handler404 = 'Core.views.handler404'
+handler500 = 'Core.views.handler500'
+handler403 = 'Core.views.handler403'
+handler400 = 'Core.views.handler400'

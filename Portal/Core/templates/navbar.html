@@ -1,0 +1,11 @@
+
+<nav class="bg-white px-12 py-2 shadow rounded-md flex justify-start items-center">
+    <div class="flex">
+        <a class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-600" href="{% url 'index' %}"><span class="font-bold uppercase">Obscurus</span></a>
+    </div>
+
+    <div class="flex">
+        <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-600" href="{% url 'Issues:index' %}">Issues</a>
+        <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-600" href="{% url 'Tips:index' %}">Tips</a>
+    </div>
+</nav>
