@@ -1,18 +1,23 @@
 
-<nav class="bg-white px-12 py-2 shadow rounded-md flex justify-start items-center">
-    <div class="flex">
-        <a class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500" href="{% url 'index' %}"><span class="font-bold uppercase">Obscurus</span></a>
+<nav class="bg-white px-12 py-2 shadow rounded-md flex justify-between items-center">
+    <div class="flex justify-start m-2">
+        <div>
+            <a class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500" href="{% url 'index' %}"><span class="font-bold uppercase">Obscurus</span></a>
+        </div>
+    
+        <div>
+            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Issues:index' %}">Issues</a>
+            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Tips:index' %}">Tips</a>
+        </div>
     </div>
 
-    <div class="flex">
-        <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Issues:index' %}">Issues</a>
-        <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Tips:index' %}">Tips</a>
-    </div>
     {% if user.is_authenticated %}
-        <p>Welcome {{ user }}</p>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <p>Fuck off</p>    
+    <div>
+        <div class="flex justify-self-stretch m-2">
+            <p class="m-1">Welcome <span class="font-bold italic">{{ user }}</span>,</p>
+            <p class="m-1"><a href="{% url 'logout' %}">Logout</a></p>
+        </div>
+    </div>
     {% endif %}
 
 </nav>
