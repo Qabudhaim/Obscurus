@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('Core.urls')),
     path('admin/', admin.site.urls),
+    
+    # path('', include('django.contrib.auth.urls')),
+    path('', include('Core.urls')),
     path('issues/', include('Issues.urls', namespace='Issues'), name='Issues'),
     path('tips/', include('Tips.urls', namespace='Tips'), name='Tips'),
+
     path("__reload__/", include("django_browser_reload.urls")),
+
 ]
 
 handler404 = 'Core.views.handler404'
