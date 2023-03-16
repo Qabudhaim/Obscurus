@@ -20,29 +20,36 @@ def add_note(request):
 
     if request.method == "POST":
         form = NoteForm(request.POST or None)
+        
         references = request.POST['references']
-       
+
+        if len(references) == 0:
+            references_exist = False
+        else:
+            references_exist = True 
+
         if form.is_valid():
-            print(type(references))
-            references = references.split(',') or None
-            print(references)
-            print(type(references))
-            for link in references:
-                if validators.url(link):
-                    continue
-                else:
-                    messages.error(request, ("References are invalid!"))
-                    return redirect('/notes/add_note/')
+
+            if references_exist:
+                references = references.split(',')
+                for link in references:
+                    if validators.url(link):
+                        continue
+                    else:
+                        messages.error(request, ("References are invalid!"))
+                        return redirect('/notes/add_note/')
         
             note_instance = form.save()
 
-            for link in references:
-                reference_instance = Reference(link=link, note=note_instance)
-                reference_instance.save()
+            if references_exist:
+                for link in references:
+                    reference_instance = Reference(link=link, note=note_instance)
+                    reference_instance.save()
+            
+            return redirect('/notes/')
+                    
         else:
-            print(form.is_valid())
-
-        return redirect('/notes/')
-
+            messages.error(request, ("Form is invalid! Fill the required fields."))
+            return redirect('/notes/add_note/')
 
     return render(request, 'add_note.html', {})

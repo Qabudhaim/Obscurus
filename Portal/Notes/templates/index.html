@@ -14,7 +14,7 @@
     {% if Notes %}
         
         {% for Note in Notes %}
-            <p class="inline text-2xl font-bold">{{ Note.title }}</p>
+            <p class="block text-2xl font-bold">{{ Note.title }}</p>
             {% for Tag in Notes.tags %}
                 <p>{{ Tag }}</p>
             {% endfor %}
