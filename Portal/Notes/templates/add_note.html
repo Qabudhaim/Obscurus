@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block leftbar %}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="bg-white px-12 py-4 shadow rounded-md">
+    
+    <div>
+        <form action="{% url 'Notes:add_note' %}" method="POST" class="m-4">
+            {% csrf_token %}
+            
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <p class="font-bold text-red-500">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            
+            <label class="block text-gray-700 text-sm font-bold my-2" for="title">
+                * Title
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="title" id="title" type="text" placeholder="Title">
+        
+            <label class="block text-gray-700 text-sm font-bold my-2" for="tags">
+                Tags
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="tags" id="tags" type="text" placeholder="Tags">
+        
+            <label class="block text-gray-700 text-sm font-bold my-2" for="references">
+                References
+            </label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="references" id="references" rows="2" placeholder="References"></textarea>
+        
+            <label class="block text-gray-700 text-sm font-bold my-2" for="desciption">
+                * Description
+            </label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="description" id="description" rows="2" placeholder="Brief description"></textarea>
+        
+            <label class="block text-gray-700 text-sm font-bold my-2" for="body">
+                Note <span class="text-sm text-gray-700">* Required</span>
+            </label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="body" id="body" rows="16" placeholder="Add your note in Markdown format"></textarea>
+        
+            <button
+                type="submit"
+                class="
+                border border-sky-500 bg-sky-500 
+                text-white 
+                rounded-md 
+                px-4 py-2 
+                my-3 
+                transition duration-500 ease select-none 
+                hover:bg-sky-600 
+                focus:outline-none focus:shadow-outline
+                ">
+                + Add Note
+            </button>
+        </form>
+    </div>
+    
+</div>
+{% endblock %}
+
+
+
+{% block rightbar %}
+{% endblock %}
+
+
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block leftbar %}
+<div class="bg-white px-12 py-4 shadow sticky top-1 rounded-md">
+    <p>Qusai</p>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="bg-white px-12 py-4 shadow rounded-md">
+
+    {% if Notes %}
+        
+        {% for Note in Notes %}
+            <p class="inline text-2xl font-bold">{{ Note.title }}</p>
+            {% for Tag in Notes.tags %}
+                <p>{{ Tag }}</p>
+            {% endfor %}
+        {% endfor %}
+
+    {% else %}
+        <p class="font-bold text-3xl">Nothing to show!</p>
+        <p>You can add some Notes from <a href="{% url 'Notes:add_note' %}" class="font-bold hover:text-sky-500">Here</a></p>
+    {% endif %}
+    
+</div>
+{% endblock %}
+
+
+
+{% block rightbar %}
+<div class="bg-white px-12 py-4 shadow rounded-md">
+    <p><a href="{% url 'Notes:add_note' %}">+ Add a new Note</a></p>
+</div>
+{% endblock %}
+
+
+
+{% block footer %}
+
+{% endblock %}

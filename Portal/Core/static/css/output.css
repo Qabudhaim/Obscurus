@@ -824,14 +824,6 @@ video {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
-.justify-items-stretch {
-  justify-items: stretch;
-}
-
 .gap-1 {
   gap: 0.25rem;
 }
@@ -1044,12 +1036,6 @@ video {
 .from-sky-700 {
   --tw-gradient-from: #0369a1;
   --tw-gradient-to: rgb(3 105 161 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-rose-700 {
-  --tw-gradient-from: #be123c;
-  --tw-gradient-to: rgb(190 18 60 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -1419,6 +1405,11 @@ video {
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.hover\:text-red-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .hover\:text-sky-500:hover {

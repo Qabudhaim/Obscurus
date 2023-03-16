@@ -6,15 +6,14 @@
         </div>
     
         <div>
-            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Issues:index' %}">Issues</a>
-            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Tips:index' %}">Tips</a>
+            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Notes:index' %}">Notes</a>
         </div>
     </div>
 
     {% if user.is_authenticated %}
     <div>
         <div class="flex justify-self-stretch m-2">
-            <p class="m-1">Welcome <span class="font-bold italic">{{ user }}</span>,</p>
+            <p class="m-1">Welcome <span class="font-bold hover:text-sky-500 transition duration-200 ease select-none italic">{{ user }}</span>,</p>
             <p class="m-1 hover:text-red-500 transition duration-200 ease select-none"><a href="{% url 'logout' %}">Logout</a></p>
         </div>
     </div>
