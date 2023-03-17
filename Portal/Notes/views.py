@@ -5,18 +5,18 @@ from Notes.models import Note, Reference
 from django.contrib import messages
 import validators
 
-@permission_required('', login_url='/login/')
+@permission_required('', login_url='Core:login')
 def index(request):
     notes = Note.objects.all().order_by('-id')
 
     context = {
         'Notes': notes,
-        'Theme': 'green'
+        'Theme': 'indigo'
     }
     
     return render(request, 'index.html', context)
 
-@permission_required('', login_url='/login/')
+@permission_required('', login_url='Core:login')
 def add_note(request):
 
     if request.method == "POST":
@@ -38,7 +38,7 @@ def add_note(request):
                         continue
                     else:
                         messages.error(request, ("References are invalid!"))
-                        return redirect('/notes/add_note/')
+                        return redirect('Notes:add_note')
         
             note_instance = form.save()
 
@@ -47,10 +47,10 @@ def add_note(request):
                     reference_instance = Reference(link=link, note=note_instance)
                     reference_instance.save()
             
-            return redirect('/notes/')
+            return redirect('Notes:index')
                     
         else:
             messages.error(request, ("Form is invalid! Fill the required fields."))
-            return redirect('/notes/add_note/')
+            return redirect('Notes:add_note')
 
     return render(request, 'add_note.html', {})

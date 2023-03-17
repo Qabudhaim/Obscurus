@@ -2,6 +2,7 @@
 
 {% block leftbar %}
 <div class="bg-{{ Theme }}-500 px-12 py-4 shadow sticky top-1 rounded-md">
+  <h1 class="text-3xl">TOC</h1>
     <p>Search bar</p>
 
     <select name="fruits" multiple>
@@ -19,31 +20,27 @@
 {% block content %}
 <div class="bg-gray-300 px-12 py-4 shadow rounded-md">
 
-    <div class="h-96 w-96 rounded-lg bg-sky-500 bg-contain bg-no-repeat bg-top" style="background-image: url(https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1120&q=80);">
-        text
-    </div>
-
-    <div class="bg-sky-500 rounded">
-        <img class="w-96" src="https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1120&q=80">
-    </div>
 
     <div class="flex flex-col justify-center items-center h-[100vh]">
-        <div class="!z-5 relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
+        <div class="!z-5 relative flex flex-col transition duration-200 ease select-none rounded-md max-w-[300px] bg-white bg-clip-border shadow-5xl shadow hover:shadow-indigo-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
             <div class="h-full w-full">
                 <div class="relative w-full">
-                    <!-- <img src="https://images.unsplash.com/photo-1505424297051-c3ad50b055ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
-                    <img src="https://images.unsplash.com/photo-1541029071515-84cc54f84dc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
-                    " class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt="">
+                    <img src="https://images.unsplash.com/photo-1505424297051-c3ad50b055ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="mb-3 h-full w-full rounded-md 3xl:h-full 3xl:w-full" alt="">
+                    <!-- <img src="https://images.unsplash.com/photo-1541029071515-84cc54f84dc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
+                    <!-- <img src="https://images.unsplash.com/photo-1586920740199-47ce35183cfd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cmFzcGJlcnJ5JTIwcGl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
+                    <!-- <img src="https://images.unsplash.com/photo-1560732488-6b0df240254a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c2VydmVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
+                    
                     <button class="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer">
                         <div class="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"></path></svg>
                         </div>
                     </button>
                 </div>
+                
                 <div class="mb-3 flex items-center justify-between px-1 md:items-start">
                     <div class="mb-2">
-                        <p class="text-lg font-bold text-navy-700"> Abstract Colors </p>
-                        <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">By Esthera Jackson </p>
+                        <p class="text-lg font-bold text-navy-700">Raspberry pi VPN</p>
+                        <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">@March 16, 2023</p>
                     </div>
                     <div class="flex flex-row-reverse md:mt-2 lg:mt-0">
                         <span class="z-0 ml-px inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#E0E5F2] text-xs text-navy-700 ">+5</span><span class="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white">
@@ -66,7 +63,7 @@
             </div>
         </div>
 
-        <div class="relative inline-block text-left">
+        <div class="relative inline-block text-left m-5">
             <div>
               <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="true" onclick="toggleDropdown()">
                 Options
@@ -133,6 +130,7 @@
 
 {% block rightbar %}
 <div class="bg-white px-12 py-4 shadow rounded-md">
+    ADD details like title and date created and some other options
     <p><a href="{% url 'Notes:add_note' %}" class="hover:text-sky-500 transition duration-200 ease select-none">+ Add a new Note</a></p>
     <div class="flex justify-center">
         <div class="mb-3 xl:w-96">

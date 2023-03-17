@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
 
-@permission_required('', login_url='/login/')
+@permission_required('', login_url='Core:login')
 def index(request):
     return render(request, 'base.html', {})
 
@@ -24,14 +24,14 @@ def login_user(request):
             return redirect(next_page)
         else:
             messages.error(request, ("Login failed! Try again."))
-            return redirect(f'/login/')
+            return redirect(f'Core:login')
     
     return render(request, 'login.html', {})
 
 def logout_user(request):
     logout(request)
     messages.success(request, ("You were logged out"))
-    return redirect('login')
+    return redirect('Core:login')
 
 def handler404(request, *args, **argv):
     context = {
