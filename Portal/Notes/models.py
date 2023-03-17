@@ -1,7 +1,8 @@
 from django.db import models
 from taggit.managers import TaggableManager
-
+from datetime import datetime
 class Note(models.Model):
+    time = models.DateTimeField(default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     title = models.CharField(max_length=100)
     description = models.TextField()
     body = models.TextField()

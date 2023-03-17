@@ -10,7 +10,8 @@ def index(request):
     notes = Note.objects.all().order_by('-id')
 
     context = {
-        'Notes': notes
+        'Notes': notes,
+        'Theme': 'green'
     }
     
     return render(request, 'index.html', context)
