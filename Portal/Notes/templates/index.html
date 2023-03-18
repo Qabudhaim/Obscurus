@@ -62,48 +62,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="relative inline-block text-left m-5">
-            <div>
-              <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="true" onclick="toggleDropdown()">
-                Options
-                <!-- Heroicon name: chevron-down -->
-                <svg class="-mr-1 ml-2 h-5 w-5 transform transition-transform duration-200 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 1 1-1.414 1.414L10 4.414l-3.293 3.293a1 1 0 0 1-1.414 0z" clip-rule="evenodd" />
-                </svg>
-              </button>
-            </div>
-          
-            <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10 transform transition-transform duration-200 ease-in-out" id="options-menu-dropdown" style="display: none;">
-              <div class="py-1">
-                <ul class="list-none">
-                  <li><label class="inline-flex items-center px-4 py-2">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span class="ml-2 text-gray-700">Option 1</span>
-                  </label></li>
-                  <li><label class="inline-flex items-center px-4 py-2">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600"><span class="ml-2 text-gray-700">Option 2</span>
-                  </label></li>
-                  <li><label class="inline-flex items-center px-4 py-2">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600"><span class="ml-2 text-gray-700">Option 3</span>
-                  </label></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <script>
-            function toggleDropdown() {
-              var dropdown = document.getElementById("options-menu-dropdown");
-              var icon = document.querySelector("#options-menu > svg");
-              if (dropdown.style.display === "none") {
-                dropdown.style.display = "block";
-                icon.classList.add("rotate-180");
-              } else {
-                dropdown.style.display = "none";
-                icon.classList.remove("rotate-180");
-              }
-            }
-          </script>
           
           
     </div>

@@ -1,11 +1,50 @@
 from django import forms
 from taggit.forms import TagField
-from Notes.models import Note
-
+from Notes.models import Note, Reference
+from urllib.parse import urlparse
+from django.core.exceptions import ValidationError
+import validators
 
 class NoteForm(forms.ModelForm):
     tags = TagField(required=False)
+    references = forms.CharField(required=False)
+    cover = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_references(self):
+        """
+        Split the input value into a list of references and validate each reference.
+        """
+        references = self.cleaned_data.get('references')
+        if references:
+            references = references.replace(" ", "")
+            references = references.split(',')
+            if '' in references:
+                references.remove('')
+
+            for url in references:
+                if validators.url(url):
+                    pass
+                else:
+                    raise ValidationError(f"'{url}' is not a valid URL.")
+                
+        return references
+    
+    def clean_cover(self):
+        cover = self.cleaned_data.get('cover')
+        if cover:
+            if validators.urls(cover):
+                pass
+            else:
+                raise ValidationError(f"'{cover}' is not a valid URL.")
+    
+    def clean_tags(self):
+        tags = self.request.POST.getlist('tags')
+        return tags
 
     class Meta:
         model = Note
-        fields = ['title', 'tags', 'description', 'body']
+        fields = ['title', 'tags', 'references', 'cover', 'description', 'body']

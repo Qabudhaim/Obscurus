@@ -2,21 +2,52 @@
 <nav class="bg-white px-12 py-2 shadow rounded-md flex justify-between items-center">
     <div class="flex justify-start m-2">
         <div>
-            <a class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-{{ Theme }}-500" href="{% url 'index' %}"><span class="font-bold uppercase">Obscurus</span></a>
+            <a class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500" href="{% url 'Core:index' %}"><span class="font-bold uppercase">Obscurus</span></a>
         </div>
-    
         <div>
-            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-{{ Theme }}-500" href="{% url 'Notes:index' %}">Notes</a>
+            <a class="px-2 m-1 py-3 rounded-md hover:shadow transition duration-200 ease select-none hover:text-sky-500" href="{% url 'Notes:index' %}">Notes</a>
         </div>
     </div>
 
     {% if user.is_authenticated %}
     <div>
-        <div class="flex justify-self-stretch m-2">
-            <p class="m-1">Welcome <span class="font-bold hover:text-sky-500 transition duration-200 ease select-none italic">{{ user }}</span>,</p>
-            <p class="m-1 hover:text-red-500 transition duration-200 ease select-none"><a href="{% url 'logout' %}">Logout</a></p>
+        <div class="flex relative justify-self-stretch m-2">
+            <p class="m-1" onclick="toggleUserMenu()" id="admin-settings">Welcome <span class="font-bold hover:text-sky-500 transition duration-200 ease select-none italic">{{ user }}</span>,</p>
+            
+                <div class="absolute top-6 left-10 w-32 mt-2 py-2 bg-white border rounded-md shadow" id="user-menu-dropdown" style="display: none;">   
+                   
+                    <ul class="divide-y divide-dashed">
+                        <li class="px-4 py-2 hover:bg-sky-500 hover:text-white transition duration-200">
+                            <a href="{% url 'Core:user_settings' %}">Settings <i class="bi bi-gear"></i></a>
+                        </li>
+                        <li class="px-4 py-2 hover:bg-sky-500 hover:text-white transition duration-200">
+                            <a href="{% url 'Core:logout' %}">Logout <i class="bi bi-arrow-bar-right"></i></a>
+                        </li>
+                    </ul>
+                    
+                </div>
+
         </div>
     </div>
     {% endif %}
 
+    <script>
+        var settingsDropdown = document.getElementById("user-menu-dropdown");
+        var adminButton = document.getElementById("admin-settings");;
+
+        function toggleUserMenu() {
+            if (settingsDropdown.style.display === "none") {
+                settingsDropdown.style.display = "block";
+            } else {
+                settingsDropdown.style.display = "none";
+            }
+        }
+
+        window.addEventListener("click", function(event) {
+            if (settingsDropdown && !adminButton.contains(event.target) && !settingsDropdown.contains(event.target)) {
+                settingsDropdown.style.display = "none";
+            }
+        });
+        
+    </script>
 </nav>

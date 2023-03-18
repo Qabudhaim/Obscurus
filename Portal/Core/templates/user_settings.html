@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block leftbar %}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="bg-white px-12 py-4 shadow rounded-md">
+    
+<h1 class="text-4xl font-semibold my-2">User panel</h1>
+
+<div>
+    <div>
+        <h1 class="text-2xl my-2 font-semibold">Tags settings</h1>
+
+        <form action="{% url 'Core:add_tag' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="flex items-center my-4">
+                <input class="shadow appearance-none border rounded px-4 py-2 mr-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="tags" id="tags" type="text" placeholder="Seperate tags with comma">
+
+                <button
+                    type="submit"
+                    class="
+                    border border-sky-500 bg-sky-500 
+                    text-white 
+                    rounded-md 
+                    px-4 py-2 
+                    my-3 
+                    transition duration-500 ease select-none 
+                    hover:bg-sky-600 
+                    focus:outline-none focus:shadow-outline
+                    ">
+                    + Add Tag
+                </button>
+            </div>
+        </form>
+
+        <table class="table-auto">
+            <thead>
+                <tr>
+                    <th class="text-left border-b border-t border-slate-300 p-2">Tag</th>
+                    <th class="text-left border-b border-t border-slate-300 p-2"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for Tag in Tags %}
+                <tr>
+                    <td class="p-2">
+                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold capitalize leading-none text-sky-600 bg-sky-200 rounded-full">
+                            {{ Tag }}
+                        </span>
+                    </td>
+                    <td class="p-2 font-bold text-red-500"><a href="{% url 'Core:remove_tag' id=Tag.id %}"><i class="bi bi-x-lg"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   
+    </div>
+</div>
+
+
+</div>
+{% endblock %}
+
+
+
+{% block rightbar %}
+{% endblock %}
+
+
+
+{% block footer %}
+{% endblock %}

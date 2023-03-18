@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
+from django.contrib import messages
+from taggit.models import Tag
 
 @permission_required('', login_url='Core:login')
 def index(request):
@@ -12,19 +13,20 @@ def gallery(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-            return redirect('index')
+            return redirect('Core:index')
 
     if request.method == "POST":
-        next_page = request.GET.get('next', 'index')
+        next_page = request.GET.get('next', 'Core:index')
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            print(next_page)
             return redirect(next_page)
         else:
             messages.error(request, ("Login failed! Try again."))
-            return redirect(f'Core:login')
+            return redirect('Core:login')
     
     return render(request, 'login.html', {})
 
@@ -33,12 +35,33 @@ def logout_user(request):
     messages.success(request, ("You were logged out"))
     return redirect('Core:login')
 
-def handler404(request, *args, **argv):
+
+def user_settings(request):
+    tags = Tag.objects.all().order_by('-id')
+
     context = {
-        'Name': 'Error404',
-        'Message': 'Page Not Found'
+        'Tags': tags
     }
-    return render(request, 'error_template.html', context, status=404)
+    return render(request, 'user_settings.html', context)
+
+def add_tag(request):
+    tags_list = request.POST.get('tags').replace(" ", "").lower()
+    tags_list = tags_list.split(',')
+
+    tags = Tag.objects.all()
+
+    for tag in tags_list:
+        Tag.objects.get_or_create(name=tag)
+
+    return redirect('Core:user_settings')
+
+
+def remove_tag(request, id):
+    tag = Tag.objects.get(id=id)
+    tag.delete()
+    return redirect('Core:user_settings')
+
+
 
 def handler500(request, *args, **argv):
     context = {
@@ -46,6 +69,13 @@ def handler500(request, *args, **argv):
         'Message': 'Internal Server Error'
     }
     return render(request, 'error_template.html', context, status=500)
+
+def handler404(request, *args, **argv):
+    context = {
+        'Name': 'Error404',
+        'Message': 'Page Not Found'
+    }
+    return render(request, 'error_template.html', context, status=404)
 
 def handler403(request, *args, **argv):
     context = {

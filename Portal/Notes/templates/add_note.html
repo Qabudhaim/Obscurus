@@ -25,11 +25,80 @@
             </label>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="title" id="title" type="text" placeholder="Title">
         
-            <label class="block text-gray-700 text-sm font-bold my-2" for="tags">
+            <label class="block text-gray-700 text-sm font-bold my-2" for="cover">
+                Cover Image
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="cover" id="cover" type="text" placeholder="Cover link">
+        
+            <!-- <label class="block text-gray-700 text-sm font-bold my-2" for="tags">
                 Tags
             </label>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="tags" id="tags" type="text" placeholder="Tags">
+         -->
+
+            <div class="relative inline-block text-left mt-4">
+                <div>
+                  <button type="button" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-400  hover:bg-gray-50 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" id="tags-button" aria-expanded="true" aria-haspopup="true" onclick="toggleTagsMenu()">
+                    Tags <i class="bi bi-chevron-down"></i>
+                  </button>
+                </div>
+   
+                <div class="absolute top-9 left-10 mt-2 py-2 bg-white border rounded-md shadow" id="tags-menu-dropdown" style="display: none;">   
+                   
+                    <ul class="divide-y divide-dashed">
+                        {% for Tag in Tags %}   
+                        <li class="px-2 duration-200">
+
+                            <label class="inline-flex items-center mt-3">
+                                <input type="checkbox" name="tags" id="{{ Tag }}" value="{{ Tag }}" class="defaultCheckbox relative mr-2 flex h-4 w-4 appearance-none items-center 
+                                justify-center rounded-md outline-none transition duration-200
+                                checked:text-white ring-1 ring-offset-2 ring-sky-200 hover:ring-sky-500 checked:ring-none checked:bg-sky-500">
+                                <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold capitalize leading-none text-sky-600 bg-sky-200 rounded-full">
+                                    {{ Tag }}
+                                </span>
+                            </label>
+                            
+                        </li>  
+                        {% endfor %}
+                    </ul>
+              
+                </div>
+
+                <!-- <div class="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" id="tags-menu-dropdown" style="display: none;" aria-labelledby="tags-button" tabindex="-1">
+                  <div class="py-1" role="none">
+                    <ul class="list-none">
+                        {% for Tag in Tags %}
+                        <li class="hover:bg-gray-50 hover:text-sky-500">
+                            <input type="checkbox" name="tags" id="{{ Tag }}" value="{{ Tag }}">
+                            <label for="{{ Tag }}">{{ Tag }}</label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </div> -->
+
+              </div>
+
+              <script>
+                var tagsDropdown = document.getElementById("tags-menu-dropdown");
+                var tagsButton = document.getElementById("tags-button");
         
+                function toggleTagsMenu() {
+                    if (tagsDropdown.style.display === "none") {
+                        tagsDropdown.style.display = "block";
+                    } else {
+                        tagsDropdown.style.display = "none";
+                    }
+                }
+        
+                window.addEventListener("click", function(event) {
+                    if (tagsDropdown && !tagsButton.contains(event.target) && !tagsDropdown.contains(event.target)) {
+                        tagsDropdown.style.display = "none";
+                    }
+                });
+                
+            </script>
+
             <label class="block text-gray-700 text-sm font-bold my-2" for="references">
                 References
             </label>

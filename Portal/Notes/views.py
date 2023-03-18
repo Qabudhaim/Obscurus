@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import permission_required
 from Notes.forms import NoteForm
 from Notes.models import Note, Reference
 from django.contrib import messages
-import validators
+from taggit.models import Tag
+
 
 @permission_required('', login_url='Core:login')
 def index(request):
@@ -11,7 +12,7 @@ def index(request):
 
     context = {
         'Notes': notes,
-        'Theme': 'indigo'
+        'Theme': 'green'
     }
     
     return render(request, 'index.html', context)
@@ -19,38 +20,37 @@ def index(request):
 @permission_required('', login_url='Core:login')
 def add_note(request):
 
-    if request.method == "POST":
-        form = NoteForm(request.POST or None)
-        
-        references = request.POST['references']
+    tags = Tag.objects.all()
 
-        if len(references) == 0:
-            references_exist = False
-        else:
-            references_exist = True 
+    if request.method == "POST":
+        list_of_tags = request.POST.getlist('tags')
+        print("*****")
+        print(list_of_tags)
+        print("*****")
+
+        form = NoteForm(request.POST or None, request=request)
 
         if form.is_valid():
+            references = form.cleaned_data.pop('references')
 
-            if references_exist:
-                references = references.split(',')
-                for link in references:
-                    if validators.url(link):
-                        continue
-                    else:
-                        messages.error(request, ("References are invalid!"))
-                        return redirect('Notes:add_note')
-        
+            print(form.cleaned_data)
+
             note_instance = form.save()
 
-            if references_exist:
-                for link in references:
-                    reference_instance = Reference(link=link, note=note_instance)
-                    reference_instance.save()
-            
+            for url in references:
+                reference_instance = Reference(url=url, note=note_instance)
+                reference_instance.save()
+
             return redirect('Notes:index')
                     
         else:
-            messages.error(request, ("Form is invalid! Fill the required fields."))
-            return redirect('Notes:add_note')
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
 
-    return render(request, 'add_note.html', {})
+            return redirect('Notes:add_note')
+    
+    context = {
+        'Tags': tags
+    }
+    return render(request, 'add_note.html', context)
