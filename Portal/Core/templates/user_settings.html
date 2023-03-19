@@ -49,9 +49,7 @@
                 {% for Tag in Tags %}
                 <tr>
                     <td class="p-2">
-                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold capitalize leading-none text-sky-600 bg-sky-200 rounded-full">
-                            {{ Tag }}
-                        </span>
+                        {% include 'tag.html' %}
                     </td>
                     <td class="p-2 font-bold text-red-500"><a href="{% url 'Core:remove_tag' id=Tag.id %}"><i class="bi bi-x-lg"></i></a></td>
                 </tr>

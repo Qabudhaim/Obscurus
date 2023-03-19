@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class Note(models.Model):
     time = models.DateTimeField(default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     title = models.CharField(max_length=100)
-    cover_image = models.URLField()
+    cover = models.URLField()
     description = models.TextField()
     body = models.TextField()
 

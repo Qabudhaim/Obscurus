@@ -1,16 +1,33 @@
 {% extends 'base.html' %}
 
 {% block leftbar %}
-<div class="bg-{{ Theme }}-500 px-12 py-4 shadow sticky top-1 rounded-md">
-  <h1 class="text-3xl">TOC</h1>
-    <p>Search bar</p>
+<div class="bg-white p-4 shadow sticky top-1 rounded-md">
+    <h1 class="text-2xl font">Filter notes:</h1>
 
-    <select name="fruits" multiple>
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
-        <option value="grape">Grape</option>
-      </select>
+    <form action="{% url 'Notes:index' %}" method="GET">
+        {% csrf_token %}
+
+        <div class="flex items-center my-4">
+            <input class="shadow appearance-none border rounded px-4 py-2 mr-2 w-full text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="query" id="query" type="text" placeholder="Filter">
+
+            <button
+                type="submit"
+                class="
+                border border-sky-500 bg-sky-500 
+                text-white 
+                rounded-md 
+                px-4 py-2 
+                my-3 
+                transition duration-500 ease select-none 
+                hover:bg-sky-600 
+                focus:outline-none focus:shadow-outline
+                ">
+                Filter
+            </button>
+        </div>
+    </form>
+
+    
       
 </div>
 {% endblock %}
@@ -18,88 +35,68 @@
 
 
 {% block content %}
-<div class="bg-gray-300 px-12 py-4 shadow rounded-md">
-
-
-    <div class="flex flex-col justify-center items-center h-[100vh]">
-        <div class="!z-5 relative flex flex-col transition duration-200 ease select-none rounded-md max-w-[300px] bg-white bg-clip-border shadow-5xl shadow hover:shadow-indigo-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
-            <div class="h-full w-full">
-                <div class="relative w-full">
-                    <img src="https://images.unsplash.com/photo-1505424297051-c3ad50b055ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="mb-3 h-full w-full rounded-md 3xl:h-full 3xl:w-full" alt="">
-                    <!-- <img src="https://images.unsplash.com/photo-1541029071515-84cc54f84dc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
-                    <!-- <img src="https://images.unsplash.com/photo-1586920740199-47ce35183cfd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cmFzcGJlcnJ5JTIwcGl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
-                    <!-- <img src="https://images.unsplash.com/photo-1560732488-6b0df240254a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c2VydmVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt=""> -->
-                    
-                    <button class="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer">
-                        <div class="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50">
-                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"></path></svg>
-                        </div>
-                    </button>
+    
+    {% if Notes %}
+    <div class="flex justify-between items-center grid grid-cols-4 gap-4 rounded-md">
+    {% for Note in Notes %}
+    <div class="flex justify-bet h-full">
+        <div class="flex flex-col transition duration-200 ease rounded-md w-full bg-white bg-clip-border shadow hover:shadow-lg hover:shadow-slate-300 p-4">
+            <div class="h-full w-full relative">
+                <div class="relative mb-3 h-44 rounded-md bg-cover bg-no-repeat bg-center overflow-hidden {% if not Note.cover %} flex items-center justify-center bg-center bg-gray-300{% endif %}" style="background-image: url( '{{ Note.cover }}' )">
+                    {% if not Note.cover %}
+                        <p class="text-center text-gray-400 ">
+                            No media available
+                        </p>
+                    {% endif %}
                 </div>
                 
                 <div class="mb-3 flex items-center justify-between px-1 md:items-start">
-                    <div class="mb-2">
-                        <p class="text-lg font-bold text-navy-700">Raspberry pi VPN</p>
-                        <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">@March 16, 2023</p>
+
+                    <div class="mb-1 overflow-hidden">
+                        <a href="{% url 'Notes:show_note' Note.id %}" class="text-lg font-bold text-navy-700">{{ Note.title }}</a>
+                        <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">{{ Note.description|truncatewords:30 }}</p>
                     </div>
-                    <div class="flex flex-row-reverse md:mt-2 lg:mt-0">
-                        <span class="z-0 ml-px inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#E0E5F2] text-xs text-navy-700 ">+5</span><span class="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white">
-                            <img class="h-full w-full rounded-full object-cover" src="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/avatar1.eeef2af6dfcd3ff23cb8.png" alt="">
-                        </span>
-                        <span class="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white">
-                            <img class="h-full w-full rounded-full object-cover" src="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/avatar2.5692c39db4f8c0ea999e.png" alt="">
-                        </span>
-                        <span class="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white">
-                            <img class="h-full w-full rounded-full object-cover" src="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/avatar3.9f646ac5920fa40adf00.png" alt="">
-                        </span>
-                    </div>
+
                 </div>
-                <div class="flex items-center justify-between md:items-center lg:justify-between ">
-                    <div class="flex">
-                        <p class="!mb-0 text-sm font-bold text-brand-500">Current Bid: 0.91 <span>ETH</span></p>
-                    </div>
-                    <button href="" class="linear rounded-[20px] bg-brand-900 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700">Place Bid</button>
+
+                <div>
+                    {% for Tag in Note.tags.all %}
+                        {% include 'tag.html' %}
+                    {% endfor %}
                 </div>
             </div>
+
+            <div class="flex mt-5 w-full bottom-0 justify-end">
+                <a class="flex-none font-bold rounded-md px-3 py-1 hover:shadow transition duration-200 hover:text-sky-500" href="{% url 'Notes:show_note' Note.id %}">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
         </div>
-          
-          
     </div>
 
-
-      
-    {% if Notes %}
-        
-        {% for Note in Notes %}
-            <p class="block text-xl font-bold">{{ Note.title }}</p>
-            <p class="block text-sm">{{ Note.time }}</p>
-
-        {% endfor %}
-
-    {% else %}
-        <p class="font-bold text-3xl">Nothing to show!</p>
-        <p>You can add some Notes from <a href="{% url 'Notes:add_note' %}" class="font-bold hover:text-sky-500 transition duration-200 ease select-none">Here</a></p>
-    {% endif %}
-    
+    {% endfor %}
 </div>
+
+{% else %}
+<div class="text-justify flex justify-center items-center w-full h-[200px]">
+    <p class="font-bold text-center text-3xl">Nothing to show!</p>
+</div>
+{% endif %}
+            
+
 {% endblock %}
 
 
 
 {% block rightbar %}
-<div class="bg-white px-12 py-4 shadow rounded-md">
-    ADD details like title and date created and some other options
-    <p><a href="{% url 'Notes:add_note' %}" class="hover:text-sky-500 transition duration-200 ease select-none">+ Add a new Note</a></p>
-    <div class="flex justify-center">
-        <div class="mb-3 xl:w-96">
-              
-        </div>
-      </div>
+<div class="bg-white p-4 shadow rounded-md">
+    <h1 class="text-2xl">Options:</h1>
+    <p class="mt-5"><a href="{% url 'Notes:add_note' %}" class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500">+ Add a new Note</a></p>
 </div> 
 {% endblock %}
 
 
 
 {% block footer %}
-
+    {% if Notes.has_other_pages %}
+        {% include 'pagination.html' %}
+    {% endif %}
 {% endblock %}

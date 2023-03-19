@@ -1,18 +1,32 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from Notes.forms import NoteForm
 from Notes.models import Note, Reference
 from django.contrib import messages
 from taggit.models import Tag
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 
 @permission_required('', login_url='Core:login')
 def index(request):
-    notes = Note.objects.all().order_by('-id')
+
+    query = request.GET.get('query', '')
+
+    notes_list = Note.objects.filter(Q(tags__name__icontains=query) | Q(title__icontains=query)).order_by('-id').distinct()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(notes_list, 8)
+
+    try:
+        notes = paginator.page(page)
+    except PageNotAnInteger:
+        notes = paginator.page(1)
+    except EmptyPage:
+        notes = paginator.page(paginator.num_pages)
 
     context = {
         'Notes': notes,
-        'Theme': 'green'
     }
     
     return render(request, 'index.html', context)
@@ -20,20 +34,14 @@ def index(request):
 @permission_required('', login_url='Core:login')
 def add_note(request):
 
-    tags = Tag.objects.all()
+    tags = Tag.objects.all().order_by('-id')
 
     if request.method == "POST":
-        list_of_tags = request.POST.getlist('tags')
-        print("*****")
-        print(list_of_tags)
-        print("*****")
 
         form = NoteForm(request.POST or None, request=request)
 
         if form.is_valid():
             references = form.cleaned_data.pop('references')
-
-            print(form.cleaned_data)
 
             note_instance = form.save()
 
@@ -54,3 +62,59 @@ def add_note(request):
         'Tags': tags
     }
     return render(request, 'add_note.html', context)
+
+@permission_required('', login_url='Core:login')
+def show_note(request, id):
+
+    note = Note.objects.get(id=id)
+    
+    context = {
+        'Note': note
+    }
+    return render(request, 'show_note.html', context)
+
+@permission_required('', login_url='Core:login')
+def delete_note(request, id):
+
+    note = Note.objects.get(id=id)
+    note.delete()
+    
+    return redirect('Notes:index')
+
+@permission_required('', login_url='Core:login')
+def update_note(request, id):
+
+    note = get_object_or_404(Note, id=id)
+    tags = Tag.objects.all().order_by('-id')
+    
+    if request.method == "POST":
+
+        form = NoteForm(request.POST or None, instance=note, request=request)
+
+        if form.is_valid():
+
+            references = form.cleaned_data.pop('references')
+            note_references = note.references.all()
+            note_references.delete()
+
+            note_instance = form.save()
+
+            
+            for url in references:
+                reference_instance = Reference(url=url, note=note_instance)
+                reference_instance.save()
+
+            return redirect('Notes:show_note', id)
+                    
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
+
+            return redirect('Notes:add_note')
+        
+    context = {
+        'Note': note,
+        'Tags': tags
+    }
+    return render(request, 'update_note.html', context)

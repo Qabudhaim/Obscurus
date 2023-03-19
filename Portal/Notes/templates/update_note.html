@@ -7,7 +7,7 @@
 <div class="bg-white px-12 py-4 shadow rounded-md">
     
     <div>
-        <form action="{% url 'Notes:add_note' %}" method="POST" class="m-4">
+        <form action="{% url 'Notes:update_note' Note.id %}" method="POST" class="m-4">
             {% csrf_token %}
             
             {% if messages %}
@@ -21,12 +21,12 @@
             <label class="block text-gray-700 text-sm font-bold my-2" for="title">
                 * Title
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="title" id="title" type="text" placeholder="Title">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="title" id="title" type="text" value="{{ Note.title }}" placeholder="Title">
         
             <label class="block text-gray-700 text-sm font-bold my-2" for="cover">
                 Cover Image
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="cover" id="cover" type="text" placeholder="Cover image link">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="cover" id="cover" type="text" value="{{ Note.cover }}" placeholder="Cover image link">
         
             <div class="relative inline-block text-left mt-4">
                 <div>
@@ -42,7 +42,7 @@
                         <li class="px-2 duration-200">
 
                             <label class="inline-flex items-center mt-3">
-                                <input type="checkbox" name="tags" id="{{ Tag }}" value="{{ Tag }}" class="defaultCheckbox relative mr-2 flex h-4 w-4 appearance-none items-center 
+                                <input type="checkbox" {% if Tag in Note.tags.all %}checked{% endif %} name="tags" id="{{ Tag }}" value="{{ Tag }}" class="defaultCheckbox relative mr-2 flex h-4 w-4 appearance-none items-center 
                                 justify-center rounded-md outline-none transition duration-200
                                 checked:text-white ring-1 ring-offset-2 ring-sky-200 hover:ring-sky-500 checked:ring-none checked:bg-sky-500">
                                 {% include 'tag.html' %}
@@ -59,17 +59,17 @@
             <label class="block text-gray-700 text-sm font-bold my-2" for="references">
                 References
             </label>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="references" id="references" rows="2" placeholder="References"></textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="references" id="references" rows="2" placeholder="References">{% for reference in Note.references.all %}{{ reference }},{% endfor %}</textarea>
         
             <label class="block text-gray-700 text-sm font-bold my-2" for="description">
                 * Description
             </label>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="description" id="description" rows="2" placeholder="Brief description"></textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="description" id="description" rows="2" placeholder="Brief description">{{ Note.description }}</textarea>
         
             <label class="block text-gray-700 text-sm font-bold my-2" for="body">
                 * Note
             </label>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="body" id="body" rows="16" placeholder="Add your note in Markdown format"></textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="body" id="body" rows="16" placeholder="Add your note in Markdown format">{{ Note.body }}</textarea>
             
             <p class="text-xs text-gray-500 font-bold">* : Required field</p>
             <button
@@ -84,7 +84,7 @@
                 hover:bg-sky-600 
                 focus:outline-none focus:shadow-outline
                 ">
-                + Add
+                Update
             </button>
         </form>
     </div>

@@ -19,6 +19,7 @@ class NoteForm(forms.ModelForm):
         Split the input value into a list of references and validate each reference.
         """
         references = self.cleaned_data.get('references')
+
         if references:
             references = references.replace(" ", "")
             references = references.split(',')
@@ -30,16 +31,17 @@ class NoteForm(forms.ModelForm):
                     pass
                 else:
                     raise ValidationError(f"'{url}' is not a valid URL.")
-                
+
         return references
     
     def clean_cover(self):
         cover = self.cleaned_data.get('cover')
         if cover:
-            if validators.urls(cover):
+            if validators.url(cover):
                 pass
             else:
                 raise ValidationError(f"'{cover}' is not a valid URL.")
+        return cover
     
     def clean_tags(self):
         tags = self.request.POST.getlist('tags')
@@ -47,4 +49,4 @@ class NoteForm(forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['title', 'tags', 'references', 'cover', 'description', 'body']
+        fields = ['title', 'cover', 'tags', 'references', 'description', 'body']
