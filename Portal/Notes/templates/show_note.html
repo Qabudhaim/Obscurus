@@ -20,17 +20,17 @@
 <div class="bg-white px-12 py-4 mb-3 flex justify-between shadow rounded-md">
     <p class="text-gray-600">Created @{{ Note.time }} </p>
     <div>
-        <a href="{% url 'Notes:delete_note' Note.id %}" class="text-red-500 p-1 hover:shadow"><i class="bi bi-x-lg"></i></a>
-        <a href="{% url 'Notes:update_note' Note.id %}" class="text-blue-500 p-1 hover:shadow"><i class="bi bi-pencil"></i></a>
-        <a href="{% url 'Notes:update_note' Note.id %}" class="text-blue-500 p-1 hover:shadow"><i class="bi bi-markdown-fill"></i></a>
+        <a href="{% url 'Notes:delete_note' Note.id %}" class="text-red-500 p-1 hover:shadow"><i class="bi bi-file-earmark-x-fill"></i></a>
+        <a href="{% url 'Notes:update_note' Note.id %}" class="text-blue-500 p-1 hover:shadow"><i class="bi bi-pencil-fill"></i></a>
+        <a href="{% url 'Notes:export_note' Note.id %}" class="text-gray-900 p-1 hover:shadow"><i class="bi bi-markdown-fill"></i></a>
     </div>
 </div>
 
 <div class="bg-white px-12 py-4 mb-3 shadow rounded-md">
-    <h1 class="font-bold text-5xl block"> {{ Note.title }} </h1>
+    <h1 class="font-bold text-4xl block"> {{ Note.title }} </h1>
 
     <div class="mt-8 mx-auto prose max-w-none prose-sm note-style">
-        {{ Note.body|markdownify:"toc" }}
+        {{ Note.body|markdownify }}
     </div>
 </div>
 

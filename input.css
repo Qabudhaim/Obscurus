@@ -4,21 +4,41 @@
 
 
 @layer components {
-    .note-style > p {
-        @apply text-sky-500 font-extrabold;
+
+    .note-style > a {
+        @apply font-bold hover:text-sky-500 transition duration-200;
     }
 
-    .note-style > ol {
-        @apply text-sky-500 italic;
+    .note-style > h1 {
+        @apply text-4xl;
+    }
+    
+    .note-style > h2 {
+        @apply text-2xl;
+    }
+    
+    .note-style > h3 {
+        @apply text-xl;
     }
 
+    .note-style > h4 {
+        @apply text-lg;
+    }
+
+    .note-style > h5 {
+        @apply text-base;
+    }
+
+    .note-style > h6 {
+        @apply text-sm;
+    }
 
     .note-style > pre {
-        @apply text-rose-500 shadow-lg shadow-gray-500 bg-zinc-100;
+        @apply text-rose-500 bg-zinc-50 hover:bg-zinc-100 transition duration-200;
     }
     
     .note-style > blockquote {
-        @apply font-extrabold text-gray-700 hover:bg-zinc-300 transition duration-200 p-1 bg-zinc-100;
+        @apply font-bold text-gray-900 p-1 bg-zinc-50 hover:bg-zinc-100 transition duration-200;
     }
 
     .note-style > code {

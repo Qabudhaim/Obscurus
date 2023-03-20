@@ -7,6 +7,8 @@ from taggit.models import Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
+from django.http import HttpResponse
+
 
 @permission_required('', login_url='Core:login')
 def index(request):
@@ -118,3 +120,14 @@ def update_note(request, id):
         'Tags': tags
     }
     return render(request, 'update_note.html', context)
+
+
+@permission_required('', login_url='Core:login')
+def export_note(request, id):
+
+    note = Note.objects.get(id=id)
+    
+    response = HttpResponse(note.body, content_type='text/plain')
+    response['Content-Disposition'] = f'attachment; filename={note.title}.md'
+
+    return response

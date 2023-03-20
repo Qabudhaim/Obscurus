@@ -9,4 +9,5 @@ urlpatterns = [
     path('show_note/<int:id>', views.show_note, name="show_note"),
     path('delete_note/<int:id>', views.delete_note, name="delete_note"),
     path('update_note/<int:id>', views.update_note, name="update_note"),
+    path('export_note/<int:id>', views.export_note, name="export_note"),
 ]
