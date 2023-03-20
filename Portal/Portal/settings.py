@@ -108,9 +108,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 MARKDOWNIFY = {
    "default": {
-      "WHITELIST_TAGS": ["a", "p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "ol", "blockquote", "em", "code", "strong", "hr"]
+        "WHITELIST_TAGS": ["a", "p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "ol", "blockquote", "pre", "em", "code", "strong", "hr"],
+        "MARKDOWN_EXTENSIONS": ["markdown.extensions.fenced_code", 'markdown.extensions.toc', ],
+
    },
 }
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

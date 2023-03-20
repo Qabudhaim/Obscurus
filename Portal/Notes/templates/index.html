@@ -2,7 +2,7 @@
 
 {% block leftbar %}
 <div class="bg-white p-4 shadow sticky top-1 rounded-md">
-    <h1 class="text-2xl font">Filter notes:</h1>
+    <h1 class="text-xl font-bold">Filter:</h1>
 
     <form action="{% url 'Notes:index' %}" method="GET">
         {% csrf_token %}
@@ -88,8 +88,8 @@
 
 {% block rightbar %}
 <div class="bg-white p-4 shadow rounded-md">
-    <h1 class="text-2xl">Options:</h1>
-    <p class="mt-5"><a href="{% url 'Notes:add_note' %}" class="flex-none mr-6 font-bold rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500">+ Add a new Note</a></p>
+    <h1 class="text-xl font-bold">Options:</h1>
+    <p class="mt-4"><a href="{% url 'Notes:add_note' %}" class="flex-none mr-6 rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500">+ Add a new Note</a></p>
 </div> 
 {% endblock %}
 

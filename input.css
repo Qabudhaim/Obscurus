@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .note-style > p {
+        @apply text-sky-500 font-extrabold;
+    }
+
+    .note-style > ol {
+        @apply text-sky-500 italic;
+    }
+
+
+    .note-style > pre {
+        @apply text-rose-500 shadow-lg shadow-gray-500 bg-zinc-100;
+    }
+    
+    .note-style > blockquote {
+        @apply font-extrabold text-gray-700 hover:bg-zinc-300 transition duration-200 p-1 bg-zinc-100;
+    }
+
+    .note-style > code {
+        @apply font-extrabold text-green-400 hover:bg-zinc-300 p-1 bg-zinc-100;
+    }
+}
