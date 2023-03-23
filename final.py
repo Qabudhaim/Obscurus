@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
-from pygments.formatters import HtmlFormatter
+from pygments.formatters import html, HtmlFormatter
+from pygments.styles import get_style_by_name
 
 markdown_text = '''
 # My no
@@ -43,10 +44,10 @@ console.log("Hello, world!")
 '''
 
 # Convert the markdown to HTML
-html = markdown.markdown(markdown_text, extensions = ['markdown.extensions.tables', 'markdown.extensions.fenced_code', 'toc'])
+html_text = markdown.markdown(markdown_text, extensions = ['markdown.extensions.tables', 'markdown.extensions.fenced_code', 'toc'])
 
 # Parse the HTML with BeautifulSoup
-soup = BeautifulSoup(html, 'html.parser')
+soup = BeautifulSoup(html_text, 'html.parser')
 
 headings = soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 
@@ -68,28 +69,34 @@ for code_block in code_blocks:
     language = language[0].replace('language-', "")
 
     lexer = get_lexer_by_name(language, stripall=True)
-
-    highlighted_code = highlight(code, lexer, HtmlFormatter())
+    style = get_style_by_name("one-dark")
+    formatter = html.HtmlFormatter(style=style)
+    highlighted_code = highlight(code, lexer, formatter)
+    pygments_css=formatter.get_style_defs('.highlight')
+    
+    with open("one-dark.css", "w") as f:
+        f.write(pygments_css)
 
     new_code_block = soup.new_tag('code')
     new_code_block.string = highlighted_code
     code_block.replace_with(new_code_block)
 
-print(str(soup))
+
+html_output = """
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Markdown Document</title>
+  <link rel="stylesheet" href="one-dark.css">
+</head>
+<body>
+  {content}
+</body>
+</html>
+""".format(content=str(soup))
 
 # how to replace a block of code in html file with another using bs4
 with open('output.html', 'w') as f:
-    f.write(str(soup))
+    f.write(html_output)
 
-"""
-lexer = get_lexer_by_name("python", stripall=True) # done
-style = get_style_by_name("one-dark") # defined in django
-formatter = html.HtmlFormatter(style=style)
-html_text = html_text.replace("<code>", '<code class="highlight">', 1)
-highlighted_code = highlight(html_text, lexer, formatter)
-
-pygments_css=formatter.get_style_defs('.highlight')
-
-with open("one-dark.css", "w") as f:
-    f.write(pygments_css)
-"""
+print(html_output)
