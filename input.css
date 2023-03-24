@@ -5,10 +5,6 @@
 
 @layer components {
 
-    .note-style > a {
-        @apply font-bold hover:text-sky-500 transition duration-200;
-    }
-
     .note-style > h1 {
         @apply text-4xl;
     }
@@ -41,7 +37,25 @@
         @apply font-bold text-gray-900 p-1 bg-zinc-50 hover:bg-zinc-100 transition duration-200;
     }
 
-    .note-style > code {
-        @apply font-extrabold text-green-400 hover:bg-zinc-300 p-1 bg-zinc-100;
+    .note-style > p > code {
+        @apply font-extrabold text-rose-500 ;
     }
+
+    .note-style > p > a {
+        @apply font-extrabold no-underline hover:text-sky-500 transition duration-200 ;
+    }
+
+    .note-style > ul > li > code {
+        @apply font-extrabold text-rose-500 ;
+    }
+
+    .note-style p > img {
+        @apply rounded-md w-96;
+    }
+
+    .toc-style > ul > li > a {
+        @apply hover:text-sky-500 font-bold no-underline transition duration-200;
+    }
+
+
 }

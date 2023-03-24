@@ -6,9 +6,9 @@ from django.contrib import messages
 from taggit.models import Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-
+from Notes.operations import save_image_from_url
 from django.http import HttpResponse
-
+import shutil
 
 @permission_required('', login_url='Core:login')
 def index(request):
@@ -51,6 +51,8 @@ def add_note(request):
                 reference_instance = Reference(url=url, note=note_instance)
                 reference_instance.save()
 
+            save_image_from_url(note_instance.cover, f'media/{note_instance.id}/cover.jpg')
+
             return redirect('Notes:index')
                     
         else:
@@ -71,7 +73,7 @@ def show_note(request, id):
     note = Note.objects.get(id=id)
     
     context = {
-        'Note': note
+        'Note': note,
     }
     return render(request, 'show_note.html', context)
 
@@ -80,6 +82,8 @@ def delete_note(request, id):
 
     note = Note.objects.get(id=id)
     note.delete()
+
+    shutil.rmtree(f'media/{id}')
     
     return redirect('Notes:index')
 

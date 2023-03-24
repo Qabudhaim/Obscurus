@@ -38,6 +38,7 @@ class NoteForm(forms.ModelForm):
         cover = self.cleaned_data.get('cover')
         if cover:
             if validators.url(cover):
+
                 pass
             else:
                 raise ValidationError(f"'{cover}' is not a valid URL.")
