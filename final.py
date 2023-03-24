@@ -1,5 +1,6 @@
 import markdown
 from bs4 import BeautifulSoup
+import markupsafe
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
@@ -56,11 +57,9 @@ for heading in headings:
     toc += '<li><a href="#{}">{}</a></li>'.format(heading.get('id'), heading.text)
 toc += '</ul>'
 
-print(toc)
 
 code_blocks = soup.find_all('code')
 
-print(code_blocks)
 
 for code_block in code_blocks:
     # Get the code and language
@@ -78,8 +77,13 @@ for code_block in code_blocks:
         f.write(pygments_css)
 
     new_code_block = soup.new_tag('code')
-    new_code_block.string = highlighted_code
+    new_code_block.string = markupsafe.Markup(highlighted_code)
     code_block.replace_with(new_code_block)
+    
+    print(new_code_block)
+    
+
+    print("**")
 
 
 html_output = """
@@ -99,4 +103,4 @@ html_output = """
 with open('output.html', 'w') as f:
     f.write(html_output)
 
-print(html_output)
+
