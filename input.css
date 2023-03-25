@@ -54,7 +54,7 @@
     }
 
     .toc-style > ul > li > a {
-        @apply hover:text-sky-500 font-bold no-underline transition duration-200;
+        @apply hover:text-sky-500 no-underline transition duration-200;
     }
 
 

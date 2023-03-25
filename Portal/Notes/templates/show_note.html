@@ -46,7 +46,7 @@
 
     <ul>
         {% for Reference in Note.references.all %}
-            <li>- <a class="italic hover:text-sky-500 transition duration-200" href="{{ Reference.url }}">{{ Reference.url }}</a></li>
+            <li>- <a class="hover:text-sky-500 transition duration-200" href="{{ Reference.url }}">{{ Reference.url }}</a></li>
         {% endfor %}
     </ul>
 
