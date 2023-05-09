@@ -16,7 +16,7 @@ def login_user(request):
             return redirect('Core:index')
 
     if request.method == "POST":
-        next_page = request.GET.get('next', 'Core:index')
+        next_page = request.GET.get('next', 'Notes:index')
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)

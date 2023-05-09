@@ -51,7 +51,8 @@ def add_note(request):
                 reference_instance = Reference(url=url, note=note_instance)
                 reference_instance.save()
 
-            save_image_from_url(note_instance.cover, f'media/{note_instance.id}/cover.jpg')
+            if note_instance.cover:
+                save_image_from_url(note_instance.cover, f'media/{note_instance.id}/cover.jpg')
 
             return redirect('Notes:index')
                     
@@ -83,7 +84,8 @@ def delete_note(request, id):
     note = Note.objects.get(id=id)
     note.delete()
 
-    shutil.rmtree(f'media/{id}')
+    if note.cover:
+        shutil.rmtree(f'media/{id}')
     
     return redirect('Notes:index')
 
@@ -104,12 +106,14 @@ def update_note(request, id):
             note_references.delete()
 
             note_instance = form.save()
-
             
             for url in references:
                 reference_instance = Reference(url=url, note=note_instance)
                 reference_instance.save()
 
+            if note_instance.cover:
+                save_image_from_url(note_instance.cover, f'media/{note_instance.id}/cover.jpg')
+                
             return redirect('Notes:show_note', id)
                     
         else:

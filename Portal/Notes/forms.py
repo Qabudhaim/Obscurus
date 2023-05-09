@@ -4,6 +4,9 @@ from Notes.models import Note, Reference
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
 import validators
+from PIL import Image
+from io import BytesIO
+import requests
 
 class NoteForm(forms.ModelForm):
     tags = TagField(required=False)
@@ -38,7 +41,12 @@ class NoteForm(forms.ModelForm):
         cover = self.cleaned_data.get('cover')
         if cover:
             if validators.url(cover):
-
+                try:
+                    response = requests.get(cover)
+                    img = Image.open(BytesIO(response.content))
+                    img.close()
+                except:
+                    raise ValidationError("The URL is not a valid image.")
                 pass
             else:
                 raise ValidationError(f"'{cover}' is not a valid URL.")

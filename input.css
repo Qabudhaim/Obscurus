@@ -33,12 +33,21 @@
         @apply text-rose-500 bg-zinc-50 hover:bg-zinc-100 transition duration-200;
     }
     
+   
     .note-style > blockquote {
         @apply font-bold text-gray-900 p-1 bg-zinc-50 hover:bg-zinc-100 transition duration-200;
     }
 
     .note-style > p > code {
         @apply font-extrabold text-rose-500 ;
+    }
+
+    .note-style > ol > li >p > code {
+        @apply font-extrabold text-rose-500 ;
+    }
+
+    .note-style > ul > li > p > code {
+        @apply text-rose-500 bg-zinc-50 hover:bg-zinc-100 transition duration-200;
     }
 
     .note-style > p > a {
