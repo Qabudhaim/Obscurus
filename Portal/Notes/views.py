@@ -52,7 +52,7 @@ def add_note(request):
                 reference_instance.save()
 
             if note_instance.cover:
-                save_image_from_url(note_instance.cover, f'media/{note_instance.id}/cover.jpg')
+                save_image_from_url(note_instance.cover, f'/home/admin/Obscurus/Portal/media/{note_instance.id}/cover.jpg')
 
             return redirect('Notes:index')
                     
@@ -85,7 +85,7 @@ def delete_note(request, id):
     note.delete()
 
     if note.cover:
-        shutil.rmtree(f'media/{id}')
+        shutil.rmtree(f'/home/admin/Obscurus/Portal/media/{id}')
     
     return redirect('Notes:index')
 
@@ -112,7 +112,7 @@ def update_note(request, id):
                 reference_instance.save()
 
             if note_instance.cover:
-                save_image_from_url(note_instance.cover, f'media/{note_instance.id}/cover.jpg')
+                save_image_from_url(note_instance.cover, f'/home/admin/Obscurus/Portal/media/{note_instance.id}/cover.jpg')
                 
             return redirect('Notes:show_note', id)
                     
