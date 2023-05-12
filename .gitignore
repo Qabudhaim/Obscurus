@@ -9,6 +9,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+db
 media
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
@@ -270,3 +271,4 @@ Portal/Portal/node_modules
 jstoolchain/
 unsplash/
 Portal/media/*
+Portal/static/*
