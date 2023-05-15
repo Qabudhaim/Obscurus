@@ -9,6 +9,7 @@ from django.db.models import Q
 from Notes.operations import save_image_from_url
 from django.http import HttpResponse
 import shutil
+from django.conf import settings
 
 @permission_required('', login_url='Core:login')
 def index(request):
@@ -52,7 +53,7 @@ def add_note(request):
                 reference_instance.save()
 
             if note_instance.cover:
-                save_image_from_url(note_instance.cover, f'/home/admin/Obscurus/Portal/media/{note_instance.id}/cover.jpg')
+                save_image_from_url(note_instance.cover, f'{settings.MEDIA_ROOT}/{note_instance.id}/cover.jpg')
 
             return redirect('Notes:index')
                     
@@ -85,7 +86,7 @@ def delete_note(request, id):
     note.delete()
 
     if note.cover:
-        shutil.rmtree(f'/home/admin/Obscurus/Portal/media/{id}')
+        shutil.rmtree(f'{settings.MEDIA_ROOT}/{id}')
     
     return redirect('Notes:index')
 
