@@ -24,7 +24,7 @@ The idea originated from the fact that most of the time wasted while working was
 
 ## Demo
 
-**Obscurus** is deployed on Strato.de servers, check from [h2987968.stratoserver.net/](h2987968.stratoserver.net/).
+**Obscurus** is deployed on Strato.de servers, check from [h2987968.stratoserver.net/notes/](h2987968.stratoserver.net/notes/).
 To login, use the following credentials:
 
 - Username: `guest`
