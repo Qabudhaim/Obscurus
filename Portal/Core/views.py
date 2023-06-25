@@ -22,7 +22,6 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            print(next_page)
             return redirect(next_page)
         else:
             messages.error(request, ("Login failed! Try again."))
