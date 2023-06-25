@@ -1,4 +1,5 @@
 
+
 from django.db import migrations, models
 
 
@@ -12,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='note',
             name='time',
-            field=models.DateTimeField(default='2023-06-25 18:51:00'),
+            field=models.DateTimeField(default='2023-06-25 14:27:15'),
 
         ),
     ]
