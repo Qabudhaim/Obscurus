@@ -1,78 +1,69 @@
-{% extends 'base.html' %}
-{% load markdown_tags %}
+{% extends 'base.html' %} {% load markdown_tags %} {% block leftbar %}
+<div class="bg-white p-4 shadow sticky top-1 rounded-md">
+  <h1 class="text-xl font-bold">Table of contents</h1>
 
-{% block leftbar %}
-<div class="bg-white px-12 py-4 shadow sticky top-1 rounded-md">
-    <h1 class="text-xl font-bold">Table of contents</h1>
-
-    <div class="mx-auto prose max-w-none prose-sm toc-style">
-        {{ Note.body|toc }}
-    </div>
-
+  <div class="mx-auto prose max-w-none prose-sm toc-style">
+    {{ Note.body|toc }}
+  </div>
 </div>
-{% endblock %}
+{% endblock %} {% block content %} {% if Note.cover %}
 
-
-
-{% block content %}
-
-{% if Note.cover %}
-
-<div class="relative mb-3 w-full h-[400px] shadow rounded-md bg-cover bg-no-repeat bg-center overflow-hidden flex items-center justify-center bg-center bg-gray-300" style="background-image: url( '/media/{{Note.id}}/cover.jpg' )">
-</div>
+<div
+  class="relative mb-3 w-full h-[400px] shadow rounded-md bg-cover bg-no-repeat bg-center overflow-hidden flex items-center justify-center bg-center bg-gray-300"
+  style="background-image: url( '/media/{{Note.id}}/cover.jpg' )"
+></div>
 {% endif %}
 
 <div class="bg-white px-12 py-4 mb-3 flex justify-between shadow rounded-md">
-    <p class="text-gray-600">Created @{{ Note.time }} </p>
-    <div>
-        <a href="{% url 'Notes:delete_note' Note.id %}" onclick="return confirm('Are you sure you want to delete this note?')"  class="text-red-500 p-1 hover:shadow"><i class="bi bi-file-earmark-x-fill"></i></a>
-        <a href="{% url 'Notes:update_note' Note.id %}" class="text-blue-500 p-1 hover:shadow"><i class="bi bi-pencil-fill"></i></a>
-        <a href="{% url 'Notes:export_note' Note.id %}" class="text-gray-900 p-1 hover:shadow"><i class="bi bi-markdown-fill"></i></a>
-    </div>
+  <p class="text-gray-600">Created @{{ Note.time }} by {{ Note.created_by|capfirst }}</p>
+  <div>
+    <a
+      href="{% url 'Notes:delete_note' Note.id %}"
+      onclick="return confirm('Are you sure you want to delete this note?')"
+      class="text-red-500 p-1 hover:shadow"
+      ><i class="bi bi-file-earmark-x-fill"></i
+    ></a>
+    <a
+      href="{% url 'Notes:update_note' Note.id %}"
+      class="text-blue-500 p-1 hover:shadow"
+      ><i class="bi bi-pencil-fill"></i
+    ></a>
+    <a
+      href="{% url 'Notes:export_note' Note.id %}"
+      class="text-gray-900 p-1 hover:shadow"
+      ><i class="bi bi-markdown-fill"></i
+    ></a>
+  </div>
 </div>
 
-
 <div class="bg-white px-12 py-4 mb-3 shadow rounded-md">
-    <h1 class="font-bold text-5xl block"> {{ Note.title }} </h1>
+  <h1 class="font-bold text-5xl block">{{ Note.title }}</h1>
 
-    <div class="mt-8 mx-auto prose max-w-none prose-sm note-style">
-        {{ Note.body|markdownify }}
-    </div>
+  <div class="mt-8 mx-auto prose max-w-none prose-sm note-style">
+    {{ Note.body|markdownify }}
+  </div>
 </div>
 
 {% if Note.references.all %}
 <div class="bg-white px-12 py-4 mb-3 shadow rounded-md">
-    <h1 class="font-bold text-2xl mb-3 block"> References </h1>
+  <h1 class="font-bold text-2xl mb-3 block">References</h1>
 
-    <ul>
-        {% for Reference in Note.references.all %}
-            <li>- <a class="hover:text-sky-500 transition duration-200" href="{{ Reference.url }}">{{ Reference.url }}</a></li>
-        {% endfor %}
-    </ul>
-
-
+  <ul>
+    {% for Reference in Note.references.all %}
+    <li>
+      -
+      <a
+        class="hover:text-sky-500 transition duration-200"
+        href="{{ Reference.url }}"
+        >{{ Reference.url }}</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
 </div>
-{% endif %}
-
-
-{% endblock %}
-
-
-
-{% block rightbar %}
-
-    {% if Note.tags.all %}
-        <div class="bg-white px-12 py-4 shadow rounded-md">
-            <h1 class="text-xl mb-2 font-bold">Related tags:</h1>
-            {% for Tag in Note.tags.all %}
-                {% include 'tag.html' %}
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endblock %}
-
-
-
-{% block footer %}
-
-{% endblock %}
+{% endif %} {% endblock %} {% block rightbar %} {% if Note.tags.all %}
+<div class="bg-white p-4 shadow rounded-md">
+  <h1 class="text-xl mb-2 font-bold">Related tags:</h1>
+  {% for Tag in Note.tags.all %} {% include 'tag.html' %} {% endfor %}
+</div>
+{% endif %} {% endblock %} {% block footer %} {% endblock %}

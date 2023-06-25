@@ -16,7 +16,30 @@ def index(request):
 
     query = request.GET.get('query', '')
 
-    notes_list = Note.objects.filter(Q(tags__name__icontains=query) | Q(title__icontains=query)).order_by('-id').distinct()
+    notes_list = Note.objects.filter(Q(tags__name__icontains=query) | Q(title__icontains=query), Q(is_public=True)).order_by('-id').distinct()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(notes_list, 8)
+
+    try:
+        notes = paginator.page(page)
+    except PageNotAnInteger:
+        notes = paginator.page(1)
+    except EmptyPage:
+        notes = paginator.page(paginator.num_pages)
+
+    context = {
+        'Notes': notes,
+    }
+    
+    return render(request, 'index.html', context)
+
+@permission_required('', login_url='Core:login')
+def personal_area(request):
+
+    query = request.GET.get('query', '')
+
+    notes_list = Note.objects.filter(Q(tags__name__icontains=query) | Q(title__icontains=query), Q(created_by=request.user)).order_by('-id').distinct()
 
     page = request.GET.get('page', 1)
     paginator = Paginator(notes_list, 8)
@@ -46,7 +69,9 @@ def add_note(request):
         if form.is_valid():
             references = form.cleaned_data.pop('references')
 
-            note_instance = form.save()
+            note_instance = form.save(commit=False)
+            note_instance.created_by = request.user
+            note_instance.save()
 
             for url in references:
                 reference_instance = Reference(url=url, note=note_instance)
@@ -106,7 +131,9 @@ def update_note(request, id):
             note_references = note.references.all()
             note_references.delete()
 
-            note_instance = form.save()
+            note_instance = form.save(commit=False)
+            note_instance.created_by = note.created_by
+            note_instance.save()
             
             for url in references:
                 reference_instance = Reference(url=url, note=note_instance)

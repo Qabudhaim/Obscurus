@@ -58,4 +58,4 @@ class NoteForm(forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['title', 'cover', 'tags', 'references', 'description', 'body']
+        fields = ['title', 'cover', 'tags', 'references', 'description', 'body', 'is_public']

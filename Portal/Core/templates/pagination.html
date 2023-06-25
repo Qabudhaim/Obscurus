@@ -38,12 +38,12 @@
             
             <li class="page-item disabled m-1"><a
                 class="page-link font-bold relative block py-1.5 px-1.5 rounded border-0 bg-transparent outline-none transition-all duration-200 rounded {% if Notes.has_previous %}text-gray-800{% else %}text-gray-500 pointer-events-none{% endif %} hover:text-sky-500 hover:shadow   focus:shadow-none"
-                href="{% if Notes.has_previous %}{%url 'Notes:index'%}?page=1{% else %}{% endif %}" tabindex="-1" aria-disabled="true">First</a>
+                href="{% if Notes.has_previous %}{{request.path}}?page=1{% else %}{% endif %}" tabindex="-1" aria-disabled="true">First</a>
             </li>
             
                 <li class="page-item m-1"><a
                 class="page-link relative block py-1.5 px-1.5 rounded border-0 bg-transparent outline-none transition-all duration-200 rounded {% if Notes.has_previous %}text-gray-800{% else %}text-gray-500 pointer-events-none{% endif %} hover:text-sky-500 hover:shadow focus:shadow-none"
-                href="{% if Notes.has_previous %}{%url 'Notes:index'%}?page={{ Notes.previous_page_number }} {% else %}{% endif %}"><i class="bi bi-chevron-double-left"></i></a>
+                href="{% if Notes.has_previous %}{{request.path}}?page={{ Notes.previous_page_number }} {% else %}{% endif %}"><i class="bi bi-chevron-double-left"></i></a>
             </li>
             
             <li class="page-item  m-1"><a
@@ -53,12 +53,12 @@
             
                 <li class="page-item m-1"><a
                 class="page-link relative block py-1.5 px-1.5 rounded border-0 bg-transparent outline-none transition-all duration-200 rounded {% if Notes.has_next %}text-gray-800{% else %}text-gray-500 pointer-events-none{% endif %} hover:text-sky-500 hover:shadow focus:shadow-none"
-                href="{% if Notes.has_next %}{%url 'Notes:index'%}?page={{ Notes.next_page_number }}{% else %}{% endif %}"><i class="bi bi-chevron-double-right"></i></a>
+                href="{% if Notes.has_next %}{{request.path}}?page={{ Notes.next_page_number }}{% else %}{% endif %}"><i class="bi bi-chevron-double-right"></i></a>
             </li>
             
             <li class="page-item m-1"><a
                 class="page-link font-bold relative block py-1.5 px-1.5 rounded border-0 bg-transparent outline-none transition-all duration-200 rounded {% if Notes.has_next %}text-gray-800{% else %}text-gray-500 pointer-events-none{% endif %} hover:text-sky-500 hover:shadow focus:shadow-none"
-                href="{% if Notes.has_next %}{%url 'Notes:index'%}?page={{ Notes.paginator.num_pages }}{% else %}{% endif %}">Last</a>
+                href="{% if Notes.has_next %}{{request.path}}?page={{ Notes.paginator.num_pages }}{% else %}{% endif %}">Last</a>
             </li>
 
         </ul>

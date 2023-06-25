@@ -1,102 +1,110 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% block leftbar %}
 <div class="bg-white p-4 shadow sticky top-1 rounded-md">
-    <h1 class="text-xl font-bold">Filter:</h1>
+  <h1 class="text-xl font-bold">Filter:</h1>
 
-    <form action="{% url 'Notes:index' %}" method="GET">
-        {% csrf_token %}
+  <form action="{% url 'Notes:index' %}" method="GET">
+    {% csrf_token %}
 
-        <div class="flex items-center my-4">
-            <input class="shadow appearance-none border rounded px-4 py-2 mr-2 w-full text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="query" id="query" type="text" placeholder="Filter">
+    <div class="flex items-center my-4">
+      <input
+        class="shadow appearance-none border rounded px-4 py-2 mr-2 w-full text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3"
+        name="query"
+        id="query"
+        type="text"
+        placeholder="Filter"
+      />
 
-            <button
-                type="submit"
-                class="
-                border border-sky-500 bg-sky-500 
-                text-white 
-                rounded-md 
-                px-4 py-2 
-                my-3 
-                transition duration-500 ease select-none 
-                hover:bg-sky-600 
-                focus:outline-none focus:shadow-outline
-                ">
-                Filter
-            </button>
-        </div>
-    </form>
-
-    
-      
-</div>
-{% endblock %}
-
-
-
-{% block content %}
-    
-    {% if Notes %}
-    <div class="flex justify-between items-center grid grid-cols-4 gap-4 rounded-md">
-    {% for Note in Notes %}
-    <div class="flex justify-bet h-full">
-        <div class="flex flex-col transition duration-200 ease rounded-md w-full bg-white bg-clip-border shadow hover:shadow-lg hover:shadow-slate-300 p-4">
-            <div class="h-full w-full relative">
-                <div class="relative mb-3 h-44 rounded-md bg-cover bg-no-repeat bg-center overflow-hidden {% if not Note.cover %} flex items-center justify-center bg-center bg-gray-300{% endif %}" style="background-image: url( '/media/{{Note.id}}/cover.jpg' )">
-                    {% if not Note.cover %}
-                        <p class="text-center text-gray-400 ">
-                            No media available
-                        </p>
-                    {% endif %}
-                </div>
-                
-                <div class="mb-3 flex items-center justify-between px-1 md:items-start">
-
-                    <div class="mb-1 overflow-hidden">
-                        <a href="{% url 'Notes:show_note' Note.id %}" class="text-lg font-bold text-navy-700">{{ Note.title }}</a>
-                        <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">{{ Note.description|truncatewords:30 }}</p>
-                    </div>
-
-                </div>
-
-                <div>
-                    {% for Tag in Note.tags.all %}
-                        {% include 'tag.html' %}
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="flex mt-5 w-full bottom-0 justify-end">
-                <a class="flex-none font-bold rounded-md px-3 py-1 hover:shadow transition duration-200 hover:text-sky-500" href="{% url 'Notes:show_note' Note.id %}">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-        </div>
+      <button
+        type="submit"
+        class="border border-sky-500 bg-sky-500 text-white rounded-md px-4 py-2 my-3 transition duration-500 ease select-none hover:bg-sky-600 focus:outline-none focus:shadow-outline"
+      >
+        Filter
+      </button>
     </div>
+  </form>
+</div>
+{% endblock %} 
 
-    {% endfor %}
+{% block content %} 
+
+{% if Notes %}
+<div
+  class="flex justify-between items-center grid grid-cols-4 gap-4 rounded-md"
+>
+  {% for Note in Notes %}
+  <div class="flex justify-bet h-full">
+    <div
+      class="flex flex-col transition duration-200 ease rounded-md w-full bg-white bg-clip-border shadow hover:shadow-lg hover:shadow-slate-300 p-4"
+    >
+      <div class="h-full w-full relative">
+        <div
+          class="relative mb-3 h-44 rounded-md bg-cover bg-no-repeat bg-center overflow-hidden {% if not Note.cover %} flex items-center justify-center bg-center bg-gray-300{% endif %}"
+          style="background-image: url( '/media/{{Note.id}}/cover.jpg' )"
+        >
+          {% if not Note.cover %}
+          <p class="text-center text-gray-400">No media available</p>
+          {% endif %}
+        </div>
+
+        <div class="mb-3 flex items-center justify-between px-1 md:items-start">
+          <div class="mb-1 overflow-hidden">
+            <a
+              href="{% url 'Notes:show_note' Note.id %}"
+              class="text-lg font-bold text-navy-700"
+              >{{ Note.title }}</a
+            >
+            <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">
+              {{ Note.description|truncatewords:30 }}
+            </p>
+          </div>
+        </div>
+
+        <div>
+          {% for Tag in Note.tags.all %} {% include 'tag.html' %} {% endfor %}
+        </div>
+      </div>
+
+      <div class="flex mt-5 w-full bottom-0 justify-end">
+        <a
+          class="flex-none font-bold rounded-md px-3 py-1 hover:shadow transition duration-200 hover:text-sky-500"
+          href="{% url 'Notes:show_note' Note.id %}"
+          >Read more <i class="bi bi-arrow-right"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 
 {% else %}
 <div class="text-justify flex justify-center items-center w-full h-[200px]">
-    <p class="font-bold text-center text-3xl">Nothing to show!</p>
+  <p class="font-bold text-center text-3xl">
+    <a
+      href="{% url 'Notes:add_note' %}"
+      class="flex-none mr-6 rounded-md p-3 transition duration-200 hover:text-sky-500"
+      >+ Add a new Note</a
+    >
+  </p>
 </div>
-{% endif %}
-            
+{% endif %} 
 
-{% endblock %}
-
-
+{% endblock %} 
 
 {% block rightbar %}
 <div class="bg-white p-4 shadow rounded-md">
-    <h1 class="text-xl font-bold">Options:</h1>
-    <p class="mt-4"><a href="{% url 'Notes:add_note' %}" class="flex-none mr-6 rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500">+ Add a new Note</a></p>
-</div> 
-{% endblock %}
+  <h1 class="text-xl font-bold">Options:</h1>
+  <p class="mt-4">
+    <a
+      href="{% url 'Notes:add_note' %}"
+      class="flex-none mr-6 rounded-md p-3 hover:shadow transition duration-200 hover:text-sky-500"
+      >+ Add a new Note</a
+    >
+  </p>
+</div>
+{% endblock %} 
 
-
-
-{% block footer %}
-    {% if Notes.has_other_pages %}
-        {% include 'pagination.html' %}
-    {% endif %}
+{% block footer %} 
+{% if Notes.has_other_pages %} {% include 'pagination.html' %} {% endif %} 
 {% endblock %}

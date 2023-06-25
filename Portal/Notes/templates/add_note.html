@@ -72,6 +72,14 @@
             <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-offset-1 focus:ring focus:border-3" name="body" id="body" rows="16" placeholder="Add your note in Markdown format"></textarea>
             
             <p class="text-xs text-gray-500 font-bold">* : Required field</p>
+
+            <label class="block text-gray-700 text-sm font-bold my-2" for="is_public">
+                Public
+            </label>
+            <input type="checkbox" id="publicCheckBox" name="is_public" class="defaultCheckbox relative mr-2 flex h-4 w-4 appearance-none items-center 
+            justify-center rounded-md outline-none transition duration-200
+            checked:text-white ring-1 ring-offset-2 ring-sky-200 hover:ring-sky-500 checked:ring-none checked:bg-sky-500">
+
             <button
                 type="submit"
                 class="

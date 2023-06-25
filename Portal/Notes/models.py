@@ -1,8 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from datetime import datetime
-import validators
-from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 class Note(models.Model):
     time = models.DateTimeField(default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -10,6 +9,8 @@ class Note(models.Model):
     cover = models.URLField()
     description = models.TextField()
     body = models.TextField()
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_public = models.BooleanField(default=False)
 
     tags = TaggableManager()
 
