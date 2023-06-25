@@ -17,6 +17,7 @@
 <div class="bg-white px-12 py-4 mb-3 flex justify-between shadow rounded-md">
   <p class="text-gray-600">Created @{{ Note.time }} by {{ Note.created_by|capfirst }}</p>
   <div>
+    {% if Note.created_by == request.user %}
     <a
       href="{% url 'Notes:delete_note' Note.id %}"
       onclick="return confirm('Are you sure you want to delete this note?')"
@@ -28,6 +29,7 @@
       class="text-blue-500 p-1 hover:shadow"
       ><i class="bi bi-pencil-fill"></i
     ></a>
+    {% endif %}
     <a
       href="{% url 'Notes:export_note' Note.id %}"
       class="text-gray-900 p-1 hover:shadow"
