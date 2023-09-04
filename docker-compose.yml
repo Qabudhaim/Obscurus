@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - /var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: portal_database
+      PG_MAJOR: 13
+      PG_COLLATE: C.UTF-8
+      PG_CTYPE: C.UTF-8
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"

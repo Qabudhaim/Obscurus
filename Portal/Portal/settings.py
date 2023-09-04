@@ -80,7 +80,9 @@ WSGI_APPLICATION = 'Portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DEBUG:
+PRODUCTION = True
+
+if not PRODUCTION:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
