@@ -73,6 +73,9 @@ def add_note(request):
             note_instance.created_by = request.user
             note_instance.save()
 
+            tags = form.cleaned_data.pop('tags')
+            note_instance.tags.add(*tags)
+
             for url in references:
                 reference_instance = Reference(url=url, note=note_instance)
                 reference_instance.save()
@@ -134,6 +137,10 @@ def update_note(request, id):
             note_instance = form.save(commit=False)
             note_instance.created_by = note.created_by
             note_instance.save()
+
+            tags = form.cleaned_data.pop('tags')
+            note_instance.tags.clear()
+            note_instance.tags.add(*tags)
             
             for url in references:
                 reference_instance = Reference(url=url, note=note_instance)
