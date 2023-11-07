@@ -147,7 +147,7 @@ def update_note(request, id):
                 reference_instance.save()
 
             if note_instance.cover:
-                save_image_from_url(note_instance.cover, f'/home/admin/Obscurus/Portal/media/{note_instance.id}/cover.jpg')
+                save_image_from_url(note_instance.cover, f'{settings.MEDIA_ROOT}/{note_instance.id}/cover.jpg')
                 
             return redirect('Notes:show_note', id)
                     
