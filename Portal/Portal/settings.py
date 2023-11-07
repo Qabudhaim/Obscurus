@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=uv)m-xvb0!ibmh^*_sy&z4yi2we4z)4lj#@aw#c^yyck#$$!='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -97,7 +97,7 @@ else:
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 
@@ -147,10 +147,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+if PRODUCTION:
+    MEDIA_ROOT = "/home/server/Portal/media"
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+if PRODUCTION:
+    STATIC_ROOT = "/home/server/Portal/static"
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Default primary key field type
